@@ -1,0 +1,5 @@
+#!/usr/bin/env bash 
+#configure server so it lets connection without password
+sudo sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+sudo service ssh restart
+
