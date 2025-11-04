@@ -1,15 +1,17 @@
-#!/usr/bin/env bash
-# the file receives 4 parameters , then transfers the files to a specified server
+#!/bin/bash
+# allows 4 parameters and then transfers a file to a remote server
 
-if ["$#" -lt 4] then
+# Check parameters count
+if [ "$#" -lt 4 ]; then
     echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
-    exit 1 
+    exit 1
+fi
 
-PATH_TO_FILE = $1
-IP = $2
-USERNAME = $3
-PATH_TO_SSH_KEY = $4
+# Extract parameters
+PATH_TO_FILE=$1
+IP=$2
+USERNAME=$3
+PATH_TO_SSH_KEY=$4
 
-scp -o StrictHostKeyChecking=no -i "$PATH_TO_SSH_KEY" "$PATH_TO_FILE" "$USERNAME@$IP"
-
-
+# Transfer file
+scp -o StrictHostKeyChecking=no -i "$PATH_TO_SSH_KEY" "$PATH_TO_FILE" "$USERNAME@$IP:~/"
