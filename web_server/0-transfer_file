@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # allows 4 parameters and then transfers a file to a remote server
 
 # Check parameters count
