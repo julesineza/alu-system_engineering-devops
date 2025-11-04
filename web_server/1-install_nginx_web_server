@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-#set-up nginx 
+# Install and configure nginx web server
 
-#command to install nginx
-sudo apt-get update -y
-sudo apt-get -y install nginx
+# Update package lists and install nginx (non-interactive)
+apt-get update -y
+apt-get install -y nginx
 
-#addibng the string to the default nginx file so when we curl the root we get the scring 
-echo "Holberton School" > /var/www/html/index.nginx-debian.html
+# Write the required content to the default index page
+echo "Holberton School for the win!" | tee /var/www/html/index.nginx-debian.html > /dev/null
 
-#restart server 
+# Restart nginx without using systemctl
 service nginx restart
