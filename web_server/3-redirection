@@ -1,2 +1,28 @@
-#!/usr/bin/env bash
-#cascasca
+#!/bin/bash
+
+# 3-redirection - Alternative version that modifies existing config
+
+# Install Nginx if not already installed
+if ! command -v nginx &> /dev/null; then
+    apt-get update
+    apt-get install -y nginx
+fi
+
+# Ensure the default HTML content exists
+mkdir -p /var/www/html
+echo "Hello World!" > /var/www/html/index.html
+
+# Check if the redirect already exists in the config
+if ! grep -q "location /redirect_me" /etc/nginx/sites-available/default; then
+    # Use sed to insert the redirect configuration after the root location block
+    sed -i '/location \/ {/,/}/a\
+    \n    location /redirect_me {\
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\
+    }' /etc/nginx/sites-available/default
+fi
+
+# Test configuration and restart Nginx
+nginx -t && systemctl restart nginx
+
+echo "Nginx redirect configuration completed"
+echo "Test with: curl -sI localhost/redirect_me/"
