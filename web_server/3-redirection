@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # 3-redirection - Alternative version that modifies existing config
 
 # Install Nginx if not already installed
