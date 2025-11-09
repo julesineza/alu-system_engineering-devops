@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# 404
+
+echo "Ceci n'est pas une page" > /var/www/html/custom_404.htm
+
+# Insert `error_page 404 /custom_404.html;` before the closing server bracket
+sed -i 's@server_name _;@server_name _;\n\n    error_page 404 /custom_404.html;\n@' /etc/nginx/sites-available/default
