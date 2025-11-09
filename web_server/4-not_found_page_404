@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 # 404
 
-sudo echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
+# Update package list and install Nginx
+apt-get update
+apt-get install -y nginx
+ 
+echo "Ceci n'est pas une page" | tee /var/www/html/404.html > /dev/null
 
 # Insert `error_page 404 /custom_404.html;` before the closing server bracket
-sudo sed -i 's@server_name _;@server_name _;\n\n\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /var/www/html;\n\t}@' /etc/nginx/sites-available/default /etc/nginx/sites-available/default
+sed -i 's@server_name _;@server_name _;\n\n\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /var/www/html;\n\t}@' /etc/nginx/sites-available/default /etc/nginx/sites-available/default
