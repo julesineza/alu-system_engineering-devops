@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Minimal fix for Nginx port 80 issue
 
 # Install Nginx if not present
