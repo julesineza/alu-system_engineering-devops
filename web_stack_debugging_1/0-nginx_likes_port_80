@@ -1,0 +1,16 @@
+#!/bin/bash
+# Minimal fix for Nginx port 80 issue
+
+# Install Nginx if not present
+apt-get update && apt-get install -y nginx
+
+# Ensure default config listens on port 80
+sed -i 's/listen \[::\]:[0-9]* default_server;/listen [::]:80 default_server;/' /etc/nginx/sites-available/default
+sed -i 's/listen [0-9]* default_server;/listen 80 default_server;/' /etc/nginx/sites-available/default
+
+# Start and enable Nginx
+systemctl start nginx
+systemctl enable nginx
+
+# Test configuration and reload
+nginx -t && systemctl reload nginx
